@@ -7,5 +7,5 @@ workflows:
   maven_test:
     jobs:
       - maven/test: # checkout, build, test, and upload test results
-          app_src_directory: StringCalcKata
-          test_results_path: StringCalcKata/target/surefire-reports
+          app_src_directory: 
+          test_results_path: target/surefire-reports
