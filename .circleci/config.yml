@@ -15,8 +15,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+      - store_test_results:
+        path: test-results
 orbs:
   maven: circleci/maven@0.0.12
 # Invoke jobs via workflows
@@ -25,3 +25,4 @@ workflows:
   maven_test:
     jobs:
       - maven/test # checkout, build, test, and upload test results
+      
