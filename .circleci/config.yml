@@ -9,3 +9,18 @@ workflows:
       - maven/test: # checkout, build, test, and upload test results
           app_src_directory: 
           test_results_path: target/surefire-reports
+
+jobs:        
+    build_and_save: 
+        docker:
+        - image: circleci/golang:latest
+        steps:
+            - checkout
+            - run: make build
+            - store_artifacts:
+                path: /bin/final_build
+workflows:
+    version: 2
+    main:
+        jobs:
+            - build_and_save
