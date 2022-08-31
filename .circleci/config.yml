@@ -9,7 +9,8 @@ workflows:
       - maven/test: # checkout, build, test, and upload test results
           app_src_directory: 
           test_results_path: target/surefire-reports
-      build:
+jobs:
+  build:
     docker:
       - image: python:3.6.3-jessie
         auth:
