@@ -1,24 +1,21 @@
-version: 2.1
+version: 2.0
+
 jobs:
-  build:
+  test:
     docker:
-      - image: python:3.6.3-jessie
+      - image: cimg/openjdk:17.0.1
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-
-    working_directory: /tmp
     steps:
-      - run:
-          name: Creating Dummy Artifacts
-          command: |
-            echo "my artifact file" > /tmp/artifact-1;
-            mkdir /tmp/artifacts;
-            echo "my artifact files in a dir" > /tmp/artifacts/artifact-2;
-
+      - checkout
+      - run: ./mvnw test verify
       - store_artifacts:
-          path: /tmp/artifact-1
-          destination: artifact-file
+          path: target/site/jacoco/index.html
 
-      - store_artifacts:
-          path: /tmp/artifacts
+workflows:
+  version: 2
+
+  test-with-store-artifacts:
+    jobs:
+      - test
