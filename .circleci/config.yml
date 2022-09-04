@@ -1,9 +1,16 @@
 version: 2.1
 
 orbs:
-  circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@0.0.16
+  maven: drift/maven@0.1.13
 
+jobs:
+  example-job:
+    docker:
+      # replace with your preferred image
+      - image: cimg/base:stable
+    steps:
+      - maven/build-jar
 workflows:
-    example-workflow:
-      jobs:
-        - circleci-maven-release-orb/run-maven-release
+  example-workflow:
+    jobs:
+      - example-job
