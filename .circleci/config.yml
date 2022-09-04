@@ -24,8 +24,8 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ./target
-      - run: mvnw test
+          at: target
+      - run: ./mvnw test
 
 workflows:
   version: 2
