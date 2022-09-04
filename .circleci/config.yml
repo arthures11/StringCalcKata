@@ -1,9 +1,9 @@
 version: 2.1
 
 orbs:
-  maven-build: inclasstoday/maven-build@1.0.9
+  maven-deploy: wasiqb/maven-deploy@2.1.0
 
 workflows:
     example-workflow:
       jobs:
-        - maven-build/docker_build
+        - maven-deploy/test
