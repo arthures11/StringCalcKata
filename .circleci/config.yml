@@ -1,15 +1,38 @@
-version: 2
-jobs:        
-    build_and_save: 
-        docker:
-        - image: circleci/golang:latest
-        steps:
-            - checkout
-            - run: make build
-            - store_artifacts:
-                path: /bin/final_build
+version: 2.0
+
+jobs:
+  build:
+    docker:
+      - image: cimg/openjdk:17.0.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: ./mvnw -Dmaven.test.skip=true package
+      - persist_to_workspace:
+         root: ./
+         paths:
+           - target/
+
+  test:
+    docker:
+      - image: cimg/openjdk:17.0.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ./target
+      - run: ./mvnw test
+
 workflows:
-    version: 2
-    main:
-        jobs:
-            - build_and_save
+  version: 2
+
+  build-then-test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
