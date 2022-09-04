@@ -8,6 +8,7 @@ public class StringCalc
     public List<Integer> ints=new ArrayList<Integer>();
 
     public Integer add(String numbers){
+        return 999;
         if(numbers==null || numbers.isEmpty()) { //check czy string jest pusty
             return 0;
         }
