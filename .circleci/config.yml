@@ -3,7 +3,16 @@ version: 2.1
 orbs:
   maven: circleci/maven@1.3.0
 
+jobs:
+  example-job:
+    docker:
+      # replace with your preferred image
+      - image: cimg/base:stable
+    steps:
+      - maven/process_test_results
+
 workflows:
     gworkflow:
       jobs:
         - maven/test
+        - example-job
