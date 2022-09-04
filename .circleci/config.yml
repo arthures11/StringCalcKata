@@ -1,9 +1,9 @@
 version: 2.1
 
 orbs:
-  maven-deploy: wasiqb/maven-deploy@2.1.0
+  maven: archmix/maven@2.1.0
 
 workflows:
-    abc:
+    gg:
       jobs:
-        - maven-deploy/build
+        - maven/build
