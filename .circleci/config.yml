@@ -1,9 +1,9 @@
 version: 2.1
 
 orbs:
-  circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@0.0.16
+  maven-build: inclasstoday/maven-build@1.0.9
 
 workflows:
     example-workflow:
       jobs:
-        - circleci-maven-release-orb/run-maven-release
+        - maven-build/docker_build
