@@ -8,9 +8,8 @@ public class StringCalc
     public List<Integer> ints=new ArrayList<Integer>();
 
     public Integer add(String numbers){
-        return 999;
         if(numbers==null || numbers.isEmpty()) { //check czy string jest pusty
-            return 0;
+            return 5;
         }
         check_delimiter(numbers); //check czy istnieje niestandardowy delimiter
         if(Pattern.compile("//.\n").matcher(numbers).find()){//check czy niestandardowy delimiter
