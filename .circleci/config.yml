@@ -1,38 +1,9 @@
-version: 2.0
+version: 2.1
 
-jobs:
-  build:
-    docker:
-      - image: cimg/openjdk:17.0.1
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - run: ./mvnw -Dmaven.test.skip=true package
-      - persist_to_workspace:
-         root: ./
-         paths:
-           - target/
-
-  test:
-    docker:
-      - image: cimg/openjdk:17.0.1
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - attach_workspace:
-          at: target
-      - run: ./mvnw test
+orbs:
+  circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@0.0.16
 
 workflows:
-  version: 2
-
-  build-then-test:
-    jobs:
-      - build
-      - test:
-          requires:
-            - build
+    example-workflow:
+      jobs:
+        - circleci-maven-release-orb/run-maven-release
