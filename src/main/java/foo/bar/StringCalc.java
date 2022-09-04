@@ -9,7 +9,7 @@ public class StringCalc
 
     public Integer add(String numbers){
         if(numbers==null || numbers.isEmpty()) { //check czy string jest pusty
-            return 5;
+            return 0;
         }
         check_delimiter(numbers); //check czy istnieje niestandardowy delimiter
         if(Pattern.compile("//.\n").matcher(numbers).find()){//check czy niestandardowy delimiter
